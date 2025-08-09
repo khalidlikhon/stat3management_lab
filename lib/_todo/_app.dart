@@ -64,27 +64,53 @@ class _TODOAppState extends State<TODOApp> {
             TextField(
               controller: _taskController,
               autofocus: true,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Task name',
+                labelStyle: const TextStyle(
+                  color: Colors.teal,
+                  fontStyle: FontStyle.italic,
+                ),
                 hintText: 'What needs to be done?',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 13,
                   color: Colors.grey,
                   fontStyle: FontStyle.italic,
                 ),
-
-                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Color(0xffF5F9FA),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.teal, width: 1.5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.teal, width: 1),
+                ),
               ),
               onSubmitted: (_) => _submitNewTask(_taskController),
             ),
+
+
             const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () => _submitNewTask(_taskController),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(48),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _submitNewTask(_taskController),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Add Task'),
               ),
-              child: Text('Add Task'),
             ),
+
             const SizedBox(height: 16),
           ],
         ),
@@ -159,33 +185,39 @@ class _TODOAppState extends State<TODOApp> {
               itemBuilder: (context, index) {
                 final task = todoList[index];
                 return Card(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 6,
-                    horizontal: 10,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // More rounded for a soft look
                   ),
+                  elevation: 3,
+                  margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16), // Narrower, more elegant spacing
                   child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Better spacing
+                    leading: Checkbox(
+                      value: task.isCompleted,
+                      activeColor: Colors.teal,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)), // Squared-off checkbox
+                      onChanged: (value) => _toggleComplete(index, value),
+                    ),
                     title: Text(
                       task.task,
                       style: TextStyle(
-                        decoration: task.isCompleted
-                            ? TextDecoration.lineThrough
-                            : null,
-                        color: task.isCompleted ? Colors.grey : Colors.black,
                         fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        decoration: task.isCompleted ? TextDecoration.lineThrough : null,
+                        color: task.isCompleted ? Colors.grey : Colors.black,
                       ),
                     ),
-                    leading: Checkbox(
-                      value: task.isCompleted,
-                      onChanged: (value) =>
-                          _toggleComplete(index, value),
-                    ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete,
-                          color: Colors.redAccent),
+                      icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
                       onPressed: () => _deleteTask(index),
                     ),
                   ),
                 );
+
+
+
+
               },
             ),
           ),
