@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stat3management_lab/_counter/_app.dart';
 import 'package:stat3management_lab/_todo/_app.dart';
 
 import '_calculator/_app.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/homeScreen': (context)=> HomeScreen(),
         '/todo_app': (context)=> TODOApp(),
-        '/calculator_app': (context)=> Calculator_app(),
+        '/calculator_app': (context)=> CalculatorApp(),
+        '/counter_app': (context)=> CounterApp(),
       },
     );
   }

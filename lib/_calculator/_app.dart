@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
-const Color bodyColor = Color(0xffF5F9FA);
-const Color digitButtonColor = Colors.white;
-const Color functionButtonColor = Color(0xffE0E0E0);
-const Color operationButtonColor = Colors.teal;
 
-class Calculator_app extends StatefulWidget {
-  const Calculator_app({super.key});
+class CalculatorApp extends StatefulWidget {
+  const CalculatorApp({super.key});
 
   @override
-  State<Calculator_app> createState() => _Calculator_appState();
+  State<CalculatorApp> createState() => _CalculatorAppState();
 }
 
-class _Calculator_appState extends State<Calculator_app> {
+class _CalculatorAppState extends State<CalculatorApp> {
   String _display = '0';
   String _firstNumber = '';
   String _operation = '';
@@ -174,6 +170,9 @@ class _Calculator_appState extends State<Calculator_app> {
     );
   }
 
+
+
+
   Widget _buildButton(
       String label, Color backgroundColor, VoidCallback onPressed,
       {Color? textColor}) {
@@ -306,9 +305,9 @@ class _Calculator_appState extends State<Calculator_app> {
   }
 }
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Calculator_app(),
-  ));
-}
+
+
+const Color bodyColor = Color(0xffF5F9FA);
+const Color digitButtonColor = Colors.white;
+const Color functionButtonColor = Color(0xffE0E0E0);
+const Color operationButtonColor = Colors.teal;

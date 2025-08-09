@@ -40,85 +40,7 @@ class _TODOAppState extends State<TODOApp> {
     });
   }
 
-  void _showAddTaskSheet() {
-    final TextEditingController _taskController = TextEditingController();
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'Add New Task',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _taskController,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: 'Task name',
-                labelStyle: const TextStyle(
-                  color: Colors.teal,
-                  fontStyle: FontStyle.italic,
-                ),
-                hintText: 'What needs to be done?',
-                hintStyle: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                  fontStyle: FontStyle.italic,
-                ),
-                filled: true,
-                fillColor: Color(0xffF5F9FA),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.teal, width: 1.5),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.teal, width: 1),
-                ),
-              ),
-              onSubmitted: (_) => _submitNewTask(_taskController),
-            ),
-
-
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () => _submitNewTask(_taskController),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(48),
-                  backgroundColor: Colors.teal,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text('Add Task'),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _submitNewTask(TextEditingController controller) {
+  void _addNewTask(TextEditingController controller) {
     final taskText = controller.text.trim();
     if (taskText.isNotEmpty) {
       _addTodoTask(taskText);
@@ -232,7 +154,89 @@ class _TODOAppState extends State<TODOApp> {
 
     );
   }
+
+
+  void _showAddTaskSheet() {
+    final TextEditingController _taskController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          left: 16,
+          right: 16,
+          top: 16,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Add New Task',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _taskController,
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: 'Task name',
+                labelStyle: const TextStyle(
+                  color: Colors.teal,
+                  fontStyle: FontStyle.italic,
+                ),
+                hintText: 'What needs to be done?',
+                hintStyle: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  fontStyle: FontStyle.italic,
+                ),
+                filled: true,
+                fillColor: Color(0xffF5F9FA),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.teal, width: 1.5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.teal, width: 1),
+                ),
+              ),
+              onSubmitted: (_) => _addNewTask(_taskController),
+            ),
+
+
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _addNewTask(_taskController),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Add Task'),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
+
+
 
 class TodoItem {
   String task;
